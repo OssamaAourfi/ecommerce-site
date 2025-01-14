@@ -1,0 +1,12 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+    <div class="container"><br><br>
+        {% include 'layouts/flash_message.html.twig' %}
+        <h1>ajouter le stock pour: {{ product.name }}</h1><br><br>
+        {{ form_start(form) }}
+        {{ form_row(form.qte,{'attr':{'class':'form form-control'}}) }}<br>
+        <input type="submit" class="btn btn-primary" value="Ajouter">
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

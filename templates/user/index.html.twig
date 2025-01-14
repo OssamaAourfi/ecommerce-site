@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <table class="table"><br><br>
+        <h1>Utilisateurs</h1><br><br>
+        {% include '/layouts/flash_message.html.twig' %}
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+            <td>Nom</td>
+            <td>Prenom</td>
+            <td>Role</td>
+            <td>Actions</td>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>
+                    {% if ('ROLE_ADMIN') in user.roles %}
+                    adminitrateur
+                        {% elseif ('ROLE_EDITOR') in user.roles%}
+                        editeur
+                            {% else %}
+                        client
+                    {% endif %}
+{#                    {% for role in user.roles %}#}
+{#                        {{ role }}<br>#}
+{#                    {% endfor %}#}
+                </td>
+                <td>
+                    {% if ('ROLE_ADMIN' in user.roles ) == false %}
+
+                    {% if ('ROLE_EDITOR' in user.roles) == false %}
+                        <a onclick="return confirm('voulez vous vraiment affecter le role editeur a ce utilisateur')" class="btn btn-outline-primary" href="{{ path('app_user_to_editor',{'id':user.id}) }}">Ajouter Comme Editeur</a>
+                    {% else %}
+                        <a onclick="return confirm('voulez vous vraiment retirer le role editeur a ce utilisateur')" class="btn btn-outline-danger" href="{{ path('app_user_remove_editor_role',{'id':user.id}) }}">Retirer role Editeur</a>
+                    {% endif %}
+                    <a onclick="return confirm('voulez vous vraiment supprimer cet utilisateur')" class="btn btn-outline-danger" href="{{ path('user_remove',{'id':user.id}) }}">Supprimer</a>
+
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
