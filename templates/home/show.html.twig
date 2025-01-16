@@ -11,7 +11,7 @@
                         <h1 class="card-title" class="text-success">{{ product.name }}</h1>
                         <p class="card-text">{{ product.description }}</p>
                         <h3>{{ product.price }} Dh</h3>
-                        <a href="" class="text-success">Ajouter au panier</a>
+                        <a href="{{ path('app_cart_new',{'id':product.id}) }}" class="text-success">Ajouter au panier</a>
                     </div>
                 </div>
             </div>
