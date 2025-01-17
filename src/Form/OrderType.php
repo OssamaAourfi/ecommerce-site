@@ -42,12 +42,14 @@ class OrderType extends AbstractType
 //                'widget' => 'single_text',
 //            ])
             ->add('city', EntityType::class, [
+                'label' => 'Ville',
                 'class' => City::class,
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'form form-control',
                 ]
             ])
+            ->add('payOnDelivery',null,['label' => 'payer a la livraison'])
         ;
     }
 

@@ -32,6 +32,9 @@ class OrderController extends AbstractController
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+        }
         return $this->render('order/index.html.twig', [
             'form' => $form->createView(),
             'total' => $total,

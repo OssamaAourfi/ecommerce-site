@@ -13,11 +13,19 @@
             {{ form_end(form) }}
         </div>
         <div class="col-4"><br><br><br><br>
-            <span>Montant a payer: <br></span>
-            <h4 >{{ total }} Dh</h4>
+            <span>Montant a payer: </span>
+            <h2>
+                <span id="card-price">{{ total }} </span>
+                Dh
+            </h2>
             <span>Frais de livraison</span>
             <h2>
                 <span id="shippingCost"></span>
+                Dh
+            </h2>
+            <span>Montant Totale a payer</span>
+            <h2>
+                <span class="totale-price"></span>
                 Dh
             </h2>
         </div>
@@ -40,6 +48,10 @@
                       if(parseInt(newResponse.status) ===200){
                           // console.log(newResponse.status);
                           $('#shippingCost').text(newResponse.content);
+
+                          const cardPrice = parseInt($('#card-price').text());
+                          const shippingCost = parseInt($('#shippingCost').text());
+                          $('.totale-price').text(cardPrice+shippingCost);
                       }
 
                   },error:function(xhr,status,error){
@@ -51,8 +63,8 @@
 
         ajaxRequest(url)
           cityselector.on('change', function() {
-              const urlUpdate = `http//127.0.0.1:8000/city/${$(this).val()}/shipping`;
-              alert(urlUpdate);
+              const urlUpdate = `http//127.0.0.1:8000/city/${$(this).val()}/shipping/cost`;
+              ajaxRequest(urlUpdate);
           })
 
       })
